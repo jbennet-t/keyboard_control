@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 
-
+#Program: keyboard_input.py
+#Purpose: Acts as a publisher to the /cmd_vel topic and takes keyboard input to control ros robot
 #Authors: Jordan Sinoway,
 
 import rospy
-import getch
+import getch #theoretically gets keyboard input. need pip3 to install
+#to install 'pip3 install getch'
 
+from geometry_msgs.msg import Twist #import geometry stuff
+from std_msgs.msg import String #for pushing info to terminal
 
-from geometry_msgs.msg import Twist
-
-def get_keys():
+def get_keys(): #gets keyboard input
         k = ord(getch.getch()) #converts keypress to ord value
         if((k>=65)&(key<=68)):
             key = 1 #up
@@ -21,15 +23,15 @@ def get_keys():
             key = 4 #right
         else:
             pass
-        rospy.loginfo(key)
+        rospy.loginfo(str(key)) #write val to terminal
         return key
 
 def keyboard_input():
-    pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+    pub = rospy.Publisher('cmd_vel', Twist, queue_size=1) #publishing to cmd_vel
     rospy.init_node('keyboard_input')
 
-    speed = rospy.get_param("~speed", 0.5)
-    turn = rospy.get_param("~turn", 1.0)
+    speed = rospy.get_param("~speed", 0.5) #default speed val
+    turn = rospy.get_param("~turn", 1.0) #default turn val
     x = 0
     y = 0
     z = 0
@@ -38,22 +40,22 @@ def keyboard_input():
 
     while(1):
         key = get_keys()
-        if(key = 1):
+        if(key = 1): #up
             x = 1
             y = 0
             z = 0
             th = 0
-        elif(key = 2):
+        elif(key = 2): #down
             x = -1
             y = 0
             z = 0
             th = 0
-        elif(key = 3):
+        elif(key = 3): #left
             x = 0
             y = 0
             z = 0
             th = 1
-        elif(key = 4):
+        elif(key = 4): #right
             x = 0
             y = 0
             z = 0
@@ -72,8 +74,6 @@ def keyboard_input():
         twist.angular.y = 0
         twist.angular.z = th*turn
         pub.publish(twist)
-
-
 
 
 
