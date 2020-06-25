@@ -5,13 +5,15 @@
 #Authors: Jordan Sinoway,
 
 import rospy
+import sys, select, termios, tty #alternative keyboard input
 
-import getch #theoretically gets keyboard input. need pip3 to install
+#import getch #theoretically gets keyboard input. need pip3 to install
 #to install 'pip3 install getch'
 
 from geometry_msgs.msg import Twist #import geometry stuff
 from std_msgs.msg import String #for pushing info to terminal
 
+'''
 def get_keys(): #gets keyboard input
     key = 0
     k = ord(getch.getch()) #converts keypress to ord value
@@ -27,7 +29,15 @@ def get_keys(): #gets keyboard input
         key = 8
     rospy.loginfo(str(key)) #write val to terminal
     return key
+'''
 
+def get_keys():
+    tty.setraw(sys.stdin.fileno())
+    select.select([sys.stdin], [], [], 0)
+    key = sys.stdin.read(1)
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+    rospy.loginfo(str(key))
+    return key
 
 def keyboard_input():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1) #publishing to cmd_vel
@@ -81,6 +91,7 @@ def keyboard_input():
 
 
 if __name__ == '__main__':
+    settings = termios.tcgetattr(sys.stdin)
 
     try:
         keyboard_input()
