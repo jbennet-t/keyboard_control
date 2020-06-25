@@ -11,20 +11,22 @@ import getch #theoretically gets keyboard input. need pip3 to install
 from geometry_msgs.msg import Twist #import geometry stuff
 from std_msgs.msg import String #for pushing info to terminal
 
+
 def get_keys(): #gets keyboard input
-        k = ord(getch.getch()) #converts keypress to ord value
-        if((k>=65)&(key<=68)):
-            key = 1 #up
-        elif (k==115):
-            key = 2 #down
-        elif (k==113):
-            key = 3 #left
-        elif (k==97):
-            key = 4 #right
-        else:
-            pass
-        rospy.loginfo(str(key)) #write val to terminal
-        return key
+    key = 0
+    k = ord(getch.getch()) #converts keypress to ord value
+    if((k>=65)&(key<=68)):
+        key = 1 #up
+    elif (k==115):
+        key = 2 #down
+    elif (k==113):
+        key = 3 #left
+    elif (k==97):
+        key = 4 #right
+    else:
+        pass
+    rospy.loginfo(str(key)) #write val to terminal
+    return key
 
 def keyboard_input():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1) #publishing to cmd_vel
@@ -39,23 +41,23 @@ def keyboard_input():
     status = 0
 
     while(1):
-        key = get_keys()
-        if(key = 1): #up
+        input = get_keys()
+        if(input == 1): #up
             x = 1
             y = 0
             z = 0
             th = 0
-        elif(key = 2): #down
+        elif(input == 2): #down
             x = -1
             y = 0
             z = 0
             th = 0
-        elif(key = 3): #left
+        elif(input == 3): #left
             x = 0
             y = 0
             z = 0
             th = 1
-        elif(key = 4): #right
+        elif(input == 4): #right
             x = 0
             y = 0
             z = 0
