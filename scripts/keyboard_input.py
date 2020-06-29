@@ -14,12 +14,12 @@ from geometry_msgs.msg import Twist #import geometry stuff
 from std_msgs.msg import String #for pushing info to terminal
 
 directionInfo = """
-Taking input from keyboard and publishing to cmd_vel
+Taking input from keyboard and publishing to /cmd_vel
 
 Movement:
-    w         up
-  a   d   left right
-    s        down
+q   w   e        up
+  a   d       left right
+    s           down
 
 Hit esc to exit
 -----------------
@@ -36,6 +36,10 @@ def get_keys(): #gets keyboard input
         key = 3 #left
     elif (k==100):
         key = 4 #right
+    elif (k==113):
+        key = 5 #turn left and forward
+    elif (k==101):
+        key = 6 #turn right and forward
     elif (k==27):
         sys.exit("Exited Progam")
     else:
@@ -75,6 +79,16 @@ def keyboard_input():
             th = 1
         elif(input == 4): #right
             x = 0
+            y = 0
+            z = 0
+            th = -1
+        elif(input == 5): #left + forward
+            x = 1
+            y = 0
+            z = 0
+            th = 1
+        elif(input == 6): #right + forward
+            x = 1
             y = 0
             z = 0
             th = -1
