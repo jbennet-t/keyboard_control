@@ -13,6 +13,18 @@ import getch #theoretically gets keyboard input. need pip3 to install
 from geometry_msgs.msg import Twist #import geometry stuff
 from std_msgs.msg import String #for pushing info to terminal
 
+directionInfo = """
+Taking input from keyboard and publishing to cmd_vel
+
+Movement:
+    w         up
+  a   d   left right
+    s        down
+
+Hit esc to exit
+-----------------
+"""
+
 def get_keys(): #gets keyboard input
     key = 0
     k = ord(getch.getch()) #converts keypress to ord value
@@ -85,6 +97,7 @@ def keyboard_input():
 if __name__ == '__main__':
 
     try:
+        print(directionInfo)
         keyboard_input()
     except rospy.ROSInterruptException:
         pass
