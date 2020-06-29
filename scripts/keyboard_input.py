@@ -6,6 +6,7 @@
 
 import rospy
 
+import sys #for exiting purposes
 import getch #theoretically gets keyboard input. need pip3 to install
 #to install 'pip3 install getch'
 
@@ -15,16 +16,18 @@ from std_msgs.msg import String #for pushing info to terminal
 def get_keys(): #gets keyboard input
     key = 0
     k = ord(getch.getch()) #converts keypress to ord value
-    if((k>=65)&(key<=68)):
+    if (k==119):
         key = 1 #up
     elif (k==115):
         key = 2 #down
-    elif (k==113):
-        key = 3 #left
     elif (k==97):
+        key = 3 #left
+    elif (k==100):
         key = 4 #right
+    elif (k==27):
+        sys.exit("Exited Progam")
     else:
-        key = 8
+        key = 0
     rospy.loginfo(str(key)) #write val to terminal
     return key
 
@@ -77,7 +80,6 @@ def keyboard_input():
         twist.angular.y = 0
         twist.angular.z = th*turn
         pub.publish(twist)
-
 
 
 if __name__ == '__main__':

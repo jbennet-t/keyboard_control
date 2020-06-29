@@ -39,6 +39,7 @@ def get_keys():
     rospy.loginfo(str(key))
     return key
 
+'''
 def keyboard_input():
     pub = rospy.Publisher('cmd_vel', Twist, queue_size=1) #publishing to cmd_vel
     rospy.init_node('keyboard_input')
@@ -87,13 +88,14 @@ def keyboard_input():
         twist.angular.y = 0
         twist.angular.z = th*turn
         pub.publish(twist)
-
+'''
 
 
 if __name__ == '__main__':
     settings = termios.tcgetattr(sys.stdin)
 
     try:
-        keyboard_input()
+        while(1):
+            get_keys()
     except rospy.ROSInterruptException:
         pass
