@@ -15,6 +15,6 @@
 8. Run the program: ```rosrun keyboard_control keyboard_input.py```
 
 Note: you may have to install pip3 and getch if they are not already part of your python install
-*pip install: https://pip.pypa.io/en/stable/installing/
-*getch install: ```pip3 install getch```
+* pip install: https://pip.pypa.io/en/stable/installing/
+* getch install: ```pip3 install getch```
 
