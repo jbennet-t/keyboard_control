@@ -3,6 +3,7 @@
 ### How to Install
 1. cd to the src folder in your catkin workspace, and clone this repository there (assuming you have ros and git installed)
 2. ```git clone https://github.com/jbennet-t/keyboard_control.git```
+3. Install the python getch module: ```pip3 install getch```
 
 ### How to Run
 1. In the first terminal tab, run ```roscore```
@@ -14,7 +15,5 @@
 7. roscd to wherever you cloned the repository (```.../src/keyboard_control```)
 8. Run the program: ```rosrun keyboard_control keyboard_input.py```
 
-Note: you may have to install pip3 and getch if they are not already part of your python install
+Note: you may have to install pip3 and if it is not already part of your python install
 * pip install: https://pip.pypa.io/en/stable/installing/
-* getch install: ```pip3 install getch```
-
