@@ -60,7 +60,7 @@ def keyboard_input():
     th = 0
     status = 0
 
-    while(1):
+    while not rospy.is_shutdown():
         input = get_keys()
         if(input == 1): #up
             x = 1
