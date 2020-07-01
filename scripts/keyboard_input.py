@@ -51,8 +51,11 @@ def get_keys(): #gets keyboard input
         sys.exit("Exited Progam")
     else:
         key = 0
-    rospy.loginfo(str(key)) #write val to terminal
+    #rospy.loginfo(str(key)) #write val to terminal
     return key
+
+def velocityOut(speed,turn): #for printing/getting speed & turn angle
+    return "speed & turn angle: \tspeed %s\tturn %s " % (speed,turn)
 
 
 def keyboard_input():
@@ -125,6 +128,7 @@ def keyboard_input():
         twist.angular.y = 0
         twist.angular.z = th*turn
         pub.publish(twist)
+        print(velocityOut(speed,twist.angular.z)) #write speed/angle to terminal
 
 
 if __name__ == '__main__':
