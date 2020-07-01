@@ -17,9 +17,12 @@ directionInfo = """
 Taking input from keyboard and publishing to /cmd_vel
 
 Movement:
-q   w   e        up
+q   w   e   up/l  up  up/r
   a   d       left right
-    s           down
+    s            down
+
+    r       accelerate by 10%
+    t       deccelerate by 10%
 
 Hit esc to exit
 -----------------
@@ -40,6 +43,10 @@ def get_keys(): #gets keyboard input
         key = 5 #turn left and forward
     elif (k==101):
         key = 6 #turn right and forward
+    elif (k==114):
+        key = 7 #accelerate
+    elif (k==116):
+        key = 8 #deccelerate
     elif (k==27):
         sys.exit("Exited Progam")
     else:
@@ -92,6 +99,18 @@ def keyboard_input():
             y = 0
             z = 0
             th = -1
+        elif(input == 7): #accelerate by 10%
+            x = 0
+            y = 0
+            z = 0
+            th = 0
+            speed += 0.1
+        elif(input == 8): #deccelerate by 10%
+            x = 0
+            y = 0
+            z = 0
+            th = 0
+            speed -= 0.1
         else:
             x = 0
             y = 0
