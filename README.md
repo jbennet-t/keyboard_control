@@ -1,4 +1,5 @@
 # keyboard_control
+This is a basic keyboard teleoperation/control module built for ROS Noetic. Interfaces with Twist in ROS, and publishes to /cmd_vel for simple robot control. 
 
 ### How to Install
 1. cd to the src folder in your catkin workspace, and clone this repository there (assuming you have ros and git installed)
